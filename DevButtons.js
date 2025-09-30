@@ -92,7 +92,12 @@
   }
 
   // --- Фабрика кнопки с иконкой и лейблом
-  function makeFab({ id, title, icon, label }) {
+  function makeFab({
+    id,
+    title,
+    icon,
+    label
+  }) {
     const btn = document.createElement('button');
     btn.className = 'gm-fab';
     btn.id = id;
@@ -137,27 +142,39 @@
     script.remove();
   }
 
-  // --- Логика Ext unlock (как у вас)
   function unlockExtComponents() {
     try {
       if (window.Ext && Ext.ComponentMgr && Ext.ComponentMgr.all) {
-        Ext.ComponentMgr.all.each(function () {
-          var cmp = Ext.ComponentMgr.all.map[this];
+
+        Ext.ComponentMgr.all.each(function (c) {
+          var cmp = Ext.ComponentMgr.all.map[c];
           if (!cmp) return;
           if (cmp.className && (cmp.className.indexOf("Edit") !== -1 || cmp.className.indexOf("Button") !== -1)) {
             if (typeof cmp.setEnabled === 'function') {
-              try { cmp.setEnabled(true); } catch (_) {}
+              try {
+                cmp.setEnabled(true);
+              } catch (_) {}
             }
           }
         });
-        try { console.info('[Ext Unlock] Готово: попробовали включить Edit/Button.'); } catch (_) {}
+        try {
+          console.info('[Ext Unlock] Готово: попробовали включить Edit/Button.');
+        } catch (_) {}
       } else {
-        try { console.warn('[Ext Unlock] ExtJS не найден на странице.'); } catch (_) {}
-        try { alert('ExtJS не найден на странице.'); } catch (_) {}
+        try {
+          console.warn('[Ext Unlock] ExtJS не найден на странице.');
+        } catch (_) {}
+        try {
+          alert('ExtJS не найден на странице.');
+        } catch (_) {}
       }
     } catch (e) {
-      try { console.error('[Ext Unlock] Ошибка:', e); } catch (_) {}
-      try { alert('Ошибка: ' + (e && e.message ? e.message : e)); } catch (_) {}
+      try {
+        console.error('[Ext Unlock] Ошибка:', e);
+      } catch (_) {}
+      try {
+        alert('Ошибка: ' + (e && e.message ? e.message : e));
+      } catch (_) {}
     }
   }
 
@@ -196,4 +213,3 @@
     }
   });
 })();
-
