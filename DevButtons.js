@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Ext Unlock Button 
 // @namespace    https://example.local
-// @version      1.1
+// @version      1.2
 // @description  Кнопки-иконки, которые разворачиваются при наведении; разблокируют Ext-компоненты и перезапускают приложение
 // @match        http://localhost/*
 // @noframes
@@ -127,6 +127,7 @@
     label: 'Разблокировать поля'
   });
 
+  debugger;
   const btnRestart = makeFab({
     id: 'gmeu-restart',
     title: 'Перезапуск приложения',
@@ -134,6 +135,13 @@
     label: 'Перезапуск приложения'
   });
 
+  const btnHideMask = makeFab({
+    id: 'gmeu-hide-mask',
+    title: 'Скрыть маску загрузки',
+    icon: '🎭',
+    label: 'Скрыть маску загрузки'
+  });
+  
   // --- Запуск кода в контексте страницы
   function runInPageContext(fn) {
     const script = document.createElement('script');
@@ -198,12 +206,20 @@
     BPMSoft.AjaxProvider.request(requestConfig);
   }
 
+  // --- Скрыть маску загрузки
+  function hideBodyMask() {
+    BPMSoft.MaskHelper.HideBodyMask();
+  }
+  
   // --- Обработчики
   btnUnlock.addEventListener('click', function () {
     runInPageContext(unlockExtComponents);
   });
   btnRestart.addEventListener('click', function () {
     runInPageContext(restartApplication);
+  });
+  btnHideMask.addEventListener('click', function () {
+    runInPageContext(hideBodyMask);
   });
 
   // --- Хоткей Alt+U
