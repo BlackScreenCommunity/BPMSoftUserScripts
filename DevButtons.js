@@ -10,6 +10,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
+
 (function () {
   'use strict';
 
@@ -74,6 +75,8 @@
   /* Позиции кнопок (вторая — над первой) */
   .gm-fab#gmeu-unlock { bottom: 16px; }
   .gm-fab#gmeu-restart { bottom: calc(16px + 52px); } /* 44px высота + 8px зазор */
+  .gm-fab#gmeu-hide-mask { bottom: calc(16px + 104px); } /* 2*44px высота + 8px зазор */
+
 
   /* Вариант для reduced motion */
   @media (prefers-reduced-motion: reduce) {
@@ -127,7 +130,6 @@
     label: 'Разблокировать поля'
   });
 
-  debugger;
   const btnRestart = makeFab({
     id: 'gmeu-restart',
     title: 'Перезапуск приложения',
